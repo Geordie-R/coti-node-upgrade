@@ -7,6 +7,6 @@ If you have any issues, you can catch me on telegram or discord.
 ```
 cd ~
 rm -rf upgrade.sh
-wget https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/main/upgrade.sh && chmod +x upgrade.sh
+wget -O upgrade.sh https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/main/upgrade.sh && chmod +x upgrade.sh
 ./upgrade.sh
 ```
