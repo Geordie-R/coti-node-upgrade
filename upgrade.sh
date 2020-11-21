@@ -8,10 +8,15 @@
 # ╚═════╝ ╚═════╝    ╚═╝   ╚═╝    ╚═╝  ╚═══╝ ╚═════╝ ╚═════╝ ╚══════╝     ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝
  ######### Unofficial upgrade script by GeordieR ##########
 
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+COLOR_RESET=$(tput sgr0)
+
 
 #Make sure running as the root user
 if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
+  then echo "${RED}PLEASE RUN AS ROOT USER${COLOR_RESET}"
   exit
 fi
 
@@ -64,6 +69,36 @@ echo "Replacing version in cnode.service file"
 sed -i "s/$old_jar_name/$new_jar_name/" $filename
 echo "Process complete! - Please re-read over the outputs above for any errors"
 else
-  echo "You have the same version: $new_jar_name that is listed in the cnode.service file compared to github. No changes needed"
+  echo "echo ${YELLOW}You have the same version: $new_jar_name that is listed in the cnode.service file compared to github. No changes needed${COLOR_RESET}"
 echo "Process complete"
+fi
+echo "Reloading systemctl daemon"
+systemctl daemon-reload
+echo "Restarting cnode.service"
+systemctl restart cnode.service
+sleep 5
+status=$(systemctl is-active cnode.service)
+
+if [[ "$status" == "active" ]]; then
+
+cat << "UPGRADEEOF"
+
+██╗   ██╗██████╗  ██████╗ ██████╗  █████╗ ██████╗ ███████╗
+██║   ██║██╔══██╗██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝
+██║   ██║██████╔╝██║  ███╗██████╔╝███████║██║  ██║█████╗
+██║   ██║██╔═══╝ ██║   ██║██╔══██╗██╔══██║██║  ██║██╔══╝
+╚██████╔╝██║     ╚██████╔╝██║  ██║██║  ██║██████╔╝███████╗
+ ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝
+
+ ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ███████╗████████╗███████╗██╗
+██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║     ██╔════╝╚══██╔══╝██╔════╝██║
+██║     ██║   ██║██╔████╔██║██████╔╝██║     █████╗     ██║   █████╗  ██║
+██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║     ██╔══╝     ██║   ██╔══╝  ╚═╝
+╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ███████╗███████╗   ██║   ███████╗██╗
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝
+
+UPGRADEEOF
+else
+
+echo "${RED}Service status is not active,its $status ${COLOR_RESET}"
 fi
