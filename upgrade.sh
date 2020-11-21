@@ -69,7 +69,7 @@ echo "Replacing version in cnode.service file"
 sed -i "s/$old_jar_name/$new_jar_name/" $filename
 echo "Process complete! - Please re-read over the outputs above for any errors"
 else
-  echo "echo "${YELLOW}You have the same version: $new_jar_name that is listed in the cnode.service file compared to github. No changes needed${COLOR_RESET}"
+  echo "echo ${YELLOW}You have the same version: $new_jar_name that is listed in the cnode.service file compared to github. No changes needed${COLOR_RESET}"
 echo "Process complete"
 fi
 echo "Reloading systemctl daemon"
@@ -78,17 +78,18 @@ echo "Restarting cnode.service"
 systemctl restart cnode.service
 sleep 5
 status=$(systemctl is-active cnode.service)
+
 if [[ "$status" == "active" ]]; then
 
 cat << "UPGRADEEOF"
 
-██╗   ██╗██████╗  ██████╗ ██████╗  █████╗ ██████╗ ███████╗              
-██║   ██║██╔══██╗██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝              
-██║   ██║██████╔╝██║  ███╗██████╔╝███████║██║  ██║█████╗                
-██║   ██║██╔═══╝ ██║   ██║██╔══██╗██╔══██║██║  ██║██╔══╝                
-╚██████╔╝██║     ╚██████╔╝██║  ██║██║  ██║██████╔╝███████╗              
- ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝              
-                                                                        
+██╗   ██╗██████╗  ██████╗ ██████╗  █████╗ ██████╗ ███████╗
+██║   ██║██╔══██╗██╔════╝ ██╔══██╗██╔══██╗██╔══██╗██╔════╝
+██║   ██║██████╔╝██║  ███╗██████╔╝███████║██║  ██║█████╗
+██║   ██║██╔═══╝ ██║   ██║██╔══██╗██╔══██║██║  ██║██╔══╝
+╚██████╔╝██║     ╚██████╔╝██║  ██║██║  ██║██████╔╝███████╗
+ ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝
+
  ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ███████╗████████╗███████╗██╗
 ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║     ██╔════╝╚══██╔══╝██╔════╝██║
 ██║     ██║   ██║██╔████╔██║██████╔╝██║     █████╗     ██║   █████╗  ██║
@@ -101,4 +102,3 @@ else
 
 echo "${RED}Service status is not active,its $status ${COLOR_RESET}"
 fi
-
