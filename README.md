@@ -12,8 +12,20 @@ wget -O upgrade.sh https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade
 ```
 
 ## Corrupt database?
-If you get a corrupt database run the following code to set a reset.transactions=true in your config
+If you get a corrupt database run the following code to set a reset.transactions=true in your config and restart your cnode.service.
 
 ```
 
+cd ~
+rm -rf reset_transactions.sh
+wget -O upgrade.sh https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/main/reset_transactions.sh && chmod +x reset_transactions.sh
+./reset_transactions.sh "true"
+sudo systemctl stop cnode.service
+sudo systemctl start cnode.service
+
 ```
+Finally once your node is back up and running, set the reset to false so that we dont wipe the transactions on the next reboot.
+```
+./reset_transactions.sh "false"
+```
+
