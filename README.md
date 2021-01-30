@@ -20,6 +20,9 @@ cd ~
 rm -rf reset_transactions.sh
 wget -O reset_transactions.sh https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/main/reset_transactions.sh && chmod +x reset_transactions.sh
 ./reset_transactions.sh "true"
+```
+
+## Reboot the cnode.service
 sudo systemctl stop cnode.service
 sudo systemctl start cnode.service
 
