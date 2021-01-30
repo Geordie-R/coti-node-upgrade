@@ -1,6 +1,9 @@
 #!/bin/bash
 resetarg=$1
-config_file="fullnode.properties"
+
+
+read -p "What is your ubuntu username for coti node? (if unsure write coti) : " user_name
+config_file="/home/$user_name/coti-fullnode/fullnode.properties"
 
 function set_config_value(){
   #This replaces a key-pair value
