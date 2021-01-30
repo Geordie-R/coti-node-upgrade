@@ -10,3 +10,10 @@ rm -rf upgrade.sh
 wget -O upgrade.sh https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/main/upgrade.sh && chmod +x upgrade.sh
 ./upgrade.sh
 ```
+
+## Corrupt database?
+If you get a corrupt database run the following code to set a reset.transactions=true in your config
+
+```
+
+```
