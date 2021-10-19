@@ -4,12 +4,25 @@ A script to easily upgrade a coti full node that was originally installed with t
 Please run the script as the root user by logging in as root. Copy and paste the code below into your node after logging in. This script assumes you installed your node with the wolf install script at https://medium.com/wolf-crypto/how-to-setup-a-coti-testnet-node-on-vultr-a3710d24f892 or https://cotidocs.geordier.co.uk
 
 If you have any issues, you can catch me on telegram or discord.
+
 ```
 cd ~
 rm -rf upgrade.sh
 wget -O upgrade.sh https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/main/upgrade.sh && chmod +x upgrade.sh
-./upgrade.sh
+./upgrade.sh 
 ```
+Test Branch Code
+
+```
+cd ~
+rm -rf upgrade.sh
+wget -O upgrade.sh https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/UpgradeChooseVersion_v1/upgrade.sh && chmod +x upgrade.sh
+./upgrade.sh 
+```
+
+
+
+https://raw.githubusercontent.com/Geordie-R/coti-node-upgrade/UpgradeChooseVersion_v1/upgrade.sh
 
 ## Corrupt database?
 If you get a corrupt database run the following code to set a reset.transactions=true in your config and restart your cnode.service.
