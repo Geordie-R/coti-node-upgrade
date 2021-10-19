@@ -28,6 +28,80 @@ filename="/etc/systemd/system/cnode.service"
 apt-get update -y
 apt-get install -y jq
 
+
+
+
+
+
+
+
+shopt -s globstar dotglob
+
+cat << "MENUEOF"
+███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+████╗ ████║██╔════╝████╗  ██║██║   ██║
+██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝
+MENUEOF
+
+PS3='Please choose what node you are upgrading today.  Mainnet or Testnet. Mainnet is by invite only so you will definitely know if it is mainnet you should be choosing. Please write the number of the menu item and press enter: '
+mainnet="Upgrade a node on the COTI Mainnet"
+testnet="Upgrade a node on the COTI Testnet"
+cancelit="Cancel"
+options=("$mainnet" "$testnet" "$cancelit")
+asktorestart=0
+select opt in "${options[@]}"
+do
+    case $opt in
+        "$mainnet")
+        action="mainnet"
+        echo "You chose a mainnet node upgrade"
+        sleep 1
+         break
+            ;;
+        "$testnet")
+            echo "You chose a TESTNET node upgrade"
+        action="testnet"
+        sleep 1
+        break
+            ;;
+       "$cancelit")
+            echo "${RED}You chose to cancel${COLOR_RESET}"
+        action="cancel"
+        exit 1
+break
+            ;;
+        "Quit")
+            exit 1
+break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 cd /home/coti/coti-fullnode/
 
 #Lets check if we actually need to git pull
