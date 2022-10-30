@@ -212,6 +212,41 @@ cp /home/$username/fullnode.properties /home/$username/$node_folder/fullnode.pro
 
 chown -R $username: /home/$username/$node_folder/
 cd /home/$username/$node_folder/
+
+
+#start of java to ensure mvn command will run
+echo "## JAVA VERSION START ##"
+java -version
+echo "## JAVA VERSION END ##"
+
+echo "## Installing maven 3.5.4 START ##"
+wget -c https://downloads.apache.org/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+mkdir -p /opt/apache-maven-3.5.4/
+tar -C /opt/ -zxf apache-maven-3.5.4-bin.tar.gz
+echo "## Installing maven 3.5.4 END ##"
+
+sudo ln -sf /opt/apache-maven-3.5.4 /opt/maven
+
+if [[ ! -e /etc/profile.d/maven.sh ]]; then
+echo "Creating /etc/profile.d/maven.sh"
+    touch /etc/profile.d/maven.sh
+fi
+
+rm -f /etc/profile.d/maven.sh
+
+echo "Creating environment variables in /etc/profile.d/maven.sh"
+echo "export M2_HOME=/opt/maven" >> /etc/profile.d/maven.sh
+echo "export MAVEN_HOME=/opt/maven" >> /etc/profile.d/maven.sh
+echo "export PATH=/opt/maven/bin:$PATH" >> /etc/profile.d/maven.sh
+
+chmod +x /etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh
+sleep 2
+source /etc/profile.d/maven.sh
+sleep 2
+mvn -version
+#end of mvn install/params
+
 #BUILD!
 mvn initialize && mvn clean compile && mvn -Dmaven.test.skip=true package
 
