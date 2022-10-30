@@ -240,6 +240,36 @@ else
   echo "echo ${YELLOW}You have the same version: $new_jar_name that is listed in the cnode.service file compared to github. No changes needed${COLOR_RESET}"
 echo "Process complete"
 fi
+
+echo "Moving on to clusterstamp"
+
+#########################################
+# Download Clusterstamp
+#########################################
+
+FILE=/home/$username/$node_folder/FullNode1_clusterstamp.csv
+
+cluster_url_mainnet="https://coti.tips/downloads/FullNode1_clusterstamp.csv"
+cluster_url_testnet="https://www.dropbox.com/s/rpyercs56zmay0z/FullNode1_clusterstamp.csv"
+
+if [[ $action == "testnet" ]];
+then
+  echo "${YELLOW}Downloading the clusterstamp now from ... ${COLOR_RESET}"
+  #wget "$FILE" $cluster_url_testnet
+  wget --show-progress --progress=bar:force 2>&1 $cluster_url_testnet -P /home/$username/$node_folder/
+elif [[ $action == "mainnet" ]];
+then
+echo "${YELLOW}Downloading the mainnet clusterstamp now from ... ${COLOR_RESET}"
+#  wget "$FILE" $cluster_url_mainnet
+  wget --show-progress --progress=bar:force 2>&1 $cluster_url_mainnet -P /home/$username/$node_folder/
+fi
+
+echo "Applying chgrp and chown to clusterstamp and properties"
+chown $username /home/$username/$node_folder/FullNode1_clusterstamp.csv
+chgrp $username /home/$username/$node_folder/FullNode1_clusterstamp.csv
+chown $username /home/$username/$node_folder/fullnode.properties
+chgrp $username /home/$username/$node_folder/fullnode.properties
+
 echo "Reloading systemctl daemon"
 systemctl daemon-reload
 echo "Restarting cnode.service"
