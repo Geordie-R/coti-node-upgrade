@@ -114,7 +114,7 @@ new_version_tag=$(curl -s https://api.github.com/repos/coti-io/$node_folder/rele
 
 #Remove the front and end double quote
 new_version_tag=$(removequotes "$new_version_tag")
-testnet_version="3.1.1"
+testnet_version="3.1.2"
 coti_dir=""
 
 echo "Latest version for mainnet is $new_version_tag"
