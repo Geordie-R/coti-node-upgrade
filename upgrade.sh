@@ -163,14 +163,14 @@ echo "Chosen version is $new_version_tag_final"
 
 
 release_or_snap=""
-PSR='Please choose what you are installing a RELEASE or a SNAPSHOT. Usually its a RELEASE but if unsure always ask COTI admins or in discord. Please write the number of the menu item and press enter:'
+PS3='Please choose what you are installing a RELEASE or a SNAPSHOT. Usually its a RELEASE but if unsure always ask COTI admins or in discord. Please write the number of the menu item and press enter:'
 rel="Its a RELEASE (This is the most common option)"
 snap="Its a SNAPSHOT"
 cancelitx="Cancel"
-optionsx=("$rel" "$snap" "$cancelitx")
-select optx in "${optionsx[@]}"
+options=("$rel" "$snap" "$cancelitx")
+select opt in "${options[@]}"
 do
-    case $optx in
+    case $opt in
         "$rel")
         release_or_snap="RELEASE"
         echo "You chose RELEASE"
