@@ -197,7 +197,9 @@ break
     esac
 done
 
-
+echo "Stopping cnode.service"
+systemctl stop cnode.service
+sleep 5
 
 #Backup the fullnode.properties file to home folder
 cd /home/$username/
