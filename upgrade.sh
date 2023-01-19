@@ -131,7 +131,7 @@ extra_vers_desc="If you leave this empty, the script will terminate."
 
 fi
 
-read -p "What version node software would you like to use. If you are on mainnet, or if you are an exchange, this should have been communicated to you from COTI. $extra_vers_desc. If entering a version number, remember it takes this format: 3.1.0 ?: " new_version_tag_final
+read -p "What version node software would you like to use. If you are on mainnet, or if you are an exchange, this should have been communicated to you from COTI. $extra_vers_desc. If entering a version number, remember it takes this format: 3.1.3 ?: " new_version_tag_final
 
 
 
